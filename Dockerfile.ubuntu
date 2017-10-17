@@ -1,0 +1,9 @@
+FROM ubuntu
+
+ENV INSTALL_ME="curl jq s3cmd git ca-certificates"
+
+RUN    apt-get update \
+    && apt-get --no-install-recommends --assume-yes install $INSTALL_ME \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
