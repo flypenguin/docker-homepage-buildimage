@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
 
-set -e
+set -xe
 
 TEMP=$(mktemp -d)
 
 cd "$TEMP"
 
-GET="Linux-64bit.tar.gz"
-BASE="https://api.github.com/repos/gohugoio/hugo/releases/latest"
+export GET="Linux-64bit.tar.gz"
+export BASE="https://api.github.com/repos/gohugoio/hugo/releases/latest"
 DL=$(curl -s $BASE | jq -r ".assets[] | select(.name | test(\"${GET}\")) | .browser_download_url")
 
 curl -L $DL | tar xvzf -
