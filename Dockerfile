@@ -10,4 +10,5 @@ RUN    true \
     && apk add --no-cache $INSTALL_ME \
     && pip install s3cmd
 
-ENTRYPOINT ["/bin/bash"]
+# see here: https://gitlab.com/gitlab-org/gitlab-runner/issues/2109
+ENTRYPOINT ["/bin/bash", "-l", "-c"]
