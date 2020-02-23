@@ -2,7 +2,6 @@ image: docker:dind
 
 build_image:
   script:
-    - docker info
     - docker build -t "$IMAGE_NAME:latest"
     - docker tag "$IMAGE_NAME:latest" "$IMAGE_NAME:$CI_COMMIT_SHORT_SHA"
 
