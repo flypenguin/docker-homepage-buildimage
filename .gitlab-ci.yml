@@ -1,7 +1,12 @@
+# generally taken from here: https://is.gd/GMH3YG
+
 image: docker:dind
 
 build_image:
+  services:
+    - docker:dind
   script:
+    - docker info
     - docker build -t "$IMAGE_NAME:latest" .
     - docker tag "$IMAGE_NAME:latest" "$IMAGE_NAME:$CI_COMMIT_SHORT_SHA"
 
