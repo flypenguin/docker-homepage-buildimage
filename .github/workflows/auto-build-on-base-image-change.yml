@@ -1,0 +1,39 @@
+# sources:
+#   - https://git.io/JZns3
+#   - https://git.io/JB2AX
+#   - https://git.io/JB2x0
+
+name: Regular base image update check
+on:
+  schedule:
+    - cron: "23 13 3 * *"
+  workflow_dispatch:
+
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+
+      - name: Docker Image Update Checker
+        uses: lucacome/docker-image-update-checker@v1.1.0
+        with:
+          base-image: golang:alpine 
+          image: flypenguin/homepage-buildimage
+
+      - name: Login to DockerHub
+        uses: docker/login-action@v1 
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+          
+      - name: Build and push Docker images
+        uses: docker/build-push-action@v2.6.1
+        with:
+          context: "${{ github.workspace }}"
+          push: true
+          tags: flypenguin/homepage-builder:latest
