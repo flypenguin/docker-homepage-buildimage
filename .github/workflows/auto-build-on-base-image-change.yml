@@ -22,8 +22,8 @@ jobs:
       - name: Docker Image Update Checker
         uses: lucacome/docker-image-update-checker@v1.1.0
         with:
-          base-image: golang:alpine 
-          image: flypenguin/homepage-buildimage
+          base-image: library/golang:alpine 
+          image: flypenguin/homepage-builder
 
       - name: Login to DockerHub
         uses: docker/login-action@v1 
