@@ -2,11 +2,16 @@
 
 FROM golang:alpine3.10
 
-COPY get-hugo /usr/local/bin
+COPY get-hugo       /usr/local/bin/
+COPY set-path.sh    /etc/profile.d/
 
-ENV INSTALL_ME="curl jq bash"
+
+ENV INSTALL_ME="curl jq bash git"
 RUN    true \
-    && apk add --no-cache $INSTALL_ME
+    && apk add --no-cache $INSTALL_ME \
+    && mkdir /work
+
+WORKDIR /work
 
 # see here: https://gitlab.com/gitlab-org/gitlab-runner/issues/2109
 ENTRYPOINT ["/bin/bash", "-l", "-c"]
