@@ -6,9 +6,11 @@ TEMP=$(mktemp -d)
 
 cd "$TEMP"
 
-export GET="Linux-64bit.tar.gz"
+export FILTER0="Linux-64bit.tar.gz"
+export FILTER1="hugo_extended"
+
 export BASE="https://api.github.com/repos/gohugoio/hugo/releases/latest"
-DL=$(curl -s $BASE | jq -r ".assets[] | select(.name | test(\"${GET}\")) | .browser_download_url")
+DL=$(curl -s $BASE | jq -r ".assets[] | select(.name | test(\"${FILTER0}\")) | select(.name | test(\"${FILTER1}\")) | .browser_download_url")
 
 curl -L $DL | tar xvzf -
 mv hugo /usr/local/bin
