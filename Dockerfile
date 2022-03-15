@@ -4,7 +4,7 @@ COPY get-hugo       /usr/local/bin/
 COPY set-path.sh    /etc/profile.d/
 
 
-ENV INSTALL_ME="curl jq bash git"
+ENV INSTALL_ME="curl jq bash git ca-certificates libstdc++ gcompat"
 RUN    true \
     && apk add --no-cache $INSTALL_ME \
     && mkdir /work
