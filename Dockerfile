@@ -1,6 +1,4 @@
-# this is just a test
-
-FROM golang:alpine3.10
+FROM golang:1-alpine3.15
 
 COPY get-hugo       /usr/local/bin/
 COPY set-path.sh    /etc/profile.d/
